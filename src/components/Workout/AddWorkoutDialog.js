@@ -23,8 +23,6 @@ const AddWorkoutDialog = ({ dialog, handleCloseDialog }) => {
     setWorkout(e.target.value);
   };
 
-  console.log(workout);
-
   return (
     <Dialog
       sx={{ maxWidth: "500px", width: "100%", margin: "auto" }}
@@ -88,6 +86,12 @@ const AddWorkoutDialog = ({ dialog, handleCloseDialog }) => {
             ))}
           </Select>
         </FormControl>
+
+        {mockData
+          .find((e) => e.workoutName === workout)
+          ?.exercises?.map((ex) => (
+            <li key={ex.name}>{ex.name}</li>
+          ))}
       </DialogContent>
     </Dialog>
   );
