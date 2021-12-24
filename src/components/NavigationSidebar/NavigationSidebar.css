@@ -1,0 +1,6 @@
+.drawerWrapper {
+  height: 100%;
+  width: 18vw !important;
+  display: flex;
+  flex-direction: column;
+}
