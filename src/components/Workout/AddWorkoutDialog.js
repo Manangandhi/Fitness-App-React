@@ -23,11 +23,17 @@ const AddWorkoutDialog = ({ dialog, handleCloseDialog }) => {
     setWorkout(e.target.value);
   };
 
+  const handleClose = () => {
+    handleCloseDialog();
+    setDay("");
+    setWorkout([]);
+  };
+
   return (
     <Dialog
       sx={{ maxWidth: "500px", width: "100%", margin: "auto" }}
       open={dialog.open}
-      onClose={handleCloseDialog}
+      onClose={handleClose}
     >
       <DialogTitle
         sx={{
@@ -90,7 +96,9 @@ const AddWorkoutDialog = ({ dialog, handleCloseDialog }) => {
         {mockData
           .find((e) => e.workoutName === workout)
           ?.exercises?.map((ex) => (
-            <li key={ex.name}>{ex.name}</li>
+            <li key={ex.name}>
+              {ex.name} With {ex.weight} and {ex.rep}reps
+            </li>
           ))}
       </DialogContent>
     </Dialog>
