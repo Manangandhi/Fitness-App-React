@@ -1,4 +1,12 @@
-export const days = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
+export const days = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
 
 export const mockData = [
   {
@@ -6,18 +14,21 @@ export const mockData = [
     workoutName: "Leg",
     exercises: [
       {
+        _id: "leg-press",
         name: "leg press",
-        weight: "50kg",
+        set: "5",
         rep: 15,
       },
       {
+        _id: "squat",
         name: "squat",
-        weight: "10kg",
+        set: "1",
         rep: 10,
       },
       {
+        _id: "leg-extension",
         name: "leg extension",
-        weight: "20kg",
+        set: "2",
         rep: 20,
       },
     ],
@@ -27,18 +38,21 @@ export const mockData = [
     workoutName: "Back",
     exercises: [
       {
+        _id: "Lat-pulldown",
         name: "Lat pulldown",
-        weight: "10kg",
+        set: "1",
         rep: 15,
       },
       {
+        _id: "Deadlift",
         name: "Deadlift",
-        weight: "60kg",
+        set: "6",
         rep: 20,
       },
       {
+        _id: "DumbellRow",
         name: "Dumbell Row",
-        weight: "10kg",
+        set: "1",
         rep: 10,
       },
     ],
@@ -48,18 +62,21 @@ export const mockData = [
     workoutName: "Chest",
     exercises: [
       {
+        _id: "BenchPress",
         name: "Bench Press",
-        weight: "10kg",
+        set: "1",
         rep: 15,
       },
       {
+        _id: "InclineDumbbellpress",
         name: "Incline Dumbbell press",
-        weight: "60kg",
+        set: "6",
         rep: 20,
       },
       {
+        _id: "Pec dec Fly",
         name: "Pec dec Fly",
-        weight: "10kg",
+        set: "1",
         rep: 10,
       },
     ],
@@ -69,28 +86,33 @@ export const mockData = [
     workoutName: "Arms",
     exercises: [
       {
+        _id: "Bicepcurl",
         name: "Bicep Curl",
-        weight: "10kg",
+        set: "1",
         rep: 15,
       },
       {
+        _id: "Peacher curl",
         name: "Peacher curl",
-        weight: "60kg",
+        set: "6",
         rep: 20,
       },
       {
+        _id: "Hammercurl",
         name: "Hammer curl",
-        weight: "10kg",
+        set: "1",
         rep: 10,
       },
       {
+        _id: "Tricepulldown",
         name: "Tricep Pulldown",
-        weight: "10kg",
+        set: "1",
         rep: 10,
       },
       {
+        _id: "Tricepextension",
         name: "Tricep Extension",
-        weight: "10kg",
+        set: "1",
         rep: 10,
       },
     ],

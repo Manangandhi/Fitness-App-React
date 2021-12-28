@@ -4,3 +4,35 @@
   display: flex;
   flex-direction: column;
 }
+
+.sidebarlink-css {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    218deg,
+    rgb(169 95 105 / 75%),
+    rgb(0 138 255 / 56%)
+  );
+  height: 100%;
+  margin: 0;
+  padding: 0 1rem;
+}
+
+.menuLink-css {
+  list-style: none;
+  text-decoration: none;
+  width: 100%;
+  margin-top: 0.8rem;
+  padding: 0.3rem;
+  border-radius: 0.6rem;
+  color: #253b5f;
+  font-weight: 500;
+  background: #fff;
+  margin-right: 1rem;
+  text-align: center;
+}
+
+.menuLink-css:hover {
+  background-color: rgb(41, 55, 158);
+  color: white;
+}

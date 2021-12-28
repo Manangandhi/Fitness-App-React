@@ -6,10 +6,10 @@ import {
   showNavigationMenu,
 } from "../../store/actions/sidebarActions";
 import { sidebarLinks } from "./sidebarLinks";
+import "./NavigationSidebar.css";
 
 const NavigationSidebar = () => {
   const dispatch = useDispatch();
-  //   const location = useLocation();
 
   const menuState = useSelector((state) => state.sidebar.sidebarMenu);
 
@@ -27,31 +27,15 @@ const NavigationSidebar = () => {
       onClose={closeDrawer}
       onOpen={openDrawer}
     >
-      <ul>
+      <ul className="sidebarlink-css">
         {sidebarLinks.map((l) => {
-          //   let isCurrent = location?.pathname === l.path;
           return (
             <Link
               onClick={closeDrawer}
               key={l.path}
-              style={{ display: "flex", flexDirection: "column" }}
-              //   className={
-              //     styles.menuLink + " " + (isCurrent && styles.menuLinkSelected)
-              //   }
               to={l.path}
+              className="menuLink-css"
             >
-              {/* {l.iconClass && (
-                <i
-                  className={
-                    l.iconClass +
-                    " " +
-                    (isCurrent ? styles.menuIconSelected : styles.menuIcon)
-                  }
-                  style={{
-                    marginRight: "0.5rem",
-                  }}
-                />
-              )} */}
               {l.label}
             </Link>
           );

@@ -65,6 +65,7 @@ const Login = () => {
           className="login-form-btn"
           type="button"
           onClick={handleLoginBtn}
+          disabled={loading}
         >
           {loading ? (
             <ImSpinner6 icon="spinner" className="spinner" />

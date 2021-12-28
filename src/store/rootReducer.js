@@ -1,11 +1,13 @@
 import { combineReducers } from "redux";
 
 import { authReducer } from "./reducers/authReducer";
+import { selectedWorkoutReducer } from "./reducers/selectedWorkouts";
 import { sidebarReducer } from "./reducers/sidebarReducer";
 
 const appReducer = combineReducers({
   auth: authReducer,
   sidebar: sidebarReducer,
+  workout: selectedWorkoutReducer,
 });
 
 const initialState = appReducer({}, {});
