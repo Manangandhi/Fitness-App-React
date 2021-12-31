@@ -25,6 +25,11 @@
   font-weight: bold;
 }
 
+.edit-btn:hover {
+  background-color: white;
+  color: black;
+}
+
 .main-workout {
   margin-top: 1rem;
 }

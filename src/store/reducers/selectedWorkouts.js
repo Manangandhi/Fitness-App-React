@@ -44,9 +44,6 @@ export const selectedWorkoutReducer = (state = initialState, action) => {
 
     // ADD_EXERCISE_TO_WORKOUT
     case selectedWorkout.ADD_EXERCISE_TO_WORKOUT: {
-      console.log("AP", action.payload);
-      console.log("state", state.workouts);
-
       const addExerciseToArray = state.workouts.map((wk) => {
         if (
           wk.workout === action?.payload?.selected?.workout &&
@@ -57,7 +54,7 @@ export const selectedWorkoutReducer = (state = initialState, action) => {
             exercises: [
               ...wk.exercises,
               {
-                weight: action.payload.newInput.weight,
+                set: action.payload.newInput.set,
                 reps: action.payload.newInput.reps,
                 exerciseId: action.payload.selected.exercise,
               },

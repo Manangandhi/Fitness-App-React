@@ -17,9 +17,9 @@ import {
   addExerciseToWorkout,
   updateWorkout,
 } from "../../store/actions/selectedWorkout";
-import "./EditWorkoutDialog.css";
+import "./EditWorkoutPlanDialog.css";
 
-const EditWorkoutDialog = ({ dialog, handleCloseDialog }) => {
+const EditWorkoutPlanDialog = ({ dialog, handleCloseDialog }) => {
   const [currentSelection, setCurrentSelection] = useState({
     workout: "",
     exercise: "",
@@ -62,7 +62,6 @@ const EditWorkoutDialog = ({ dialog, handleCloseDialog }) => {
     let checkDayAndWorkout = result?.find(
       (r) => r.day === dialog.day && r.workout === currentSelection.workout
     );
-    // console.log(checkDayAndWorkout);
 
     // First check if workout for same day exists in selectedWorkout State Array
     if (checkDayAndWorkout) {
@@ -109,6 +108,25 @@ const EditWorkoutDialog = ({ dialog, handleCloseDialog }) => {
   };
 
   const handleSelectExercise = (ex) => {
+    // Find Already added day wise workout
+    let dayWiseWorkout = result?.find((d) => d.day === dialog.day);
+
+    // Find exercise for added workout
+    let findWorkout = dayWiseWorkout?.exercises?.find(
+      (exe) => exe.exerciseId === ex._id
+    );
+    // Update set with already added workout and exercises
+
+    findWorkout !== undefined
+      ? setSelectedExerciseInput({
+          set: findWorkout?.set,
+          reps: findWorkout?.reps,
+        })
+      : setSelectedExerciseInput({
+          set: "",
+          reps: "",
+        });
+
     setCurrentSelection((prev) => ({ ...prev, exercise: ex._id }));
   };
 
@@ -169,8 +187,14 @@ const EditWorkoutDialog = ({ dialog, handleCloseDialog }) => {
           ))}
         {currentSelection.exercise && (
           <>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <label>Sets</label>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-evenly",
+                marginTop: "1rem",
+              }}
+            >
+              <label style={{ marginTop: "0.4rem" }}>Sets :</label>
               <input
                 name="set"
                 type="number"
@@ -178,8 +202,7 @@ const EditWorkoutDialog = ({ dialog, handleCloseDialog }) => {
                 value={selectedExerciseInput.set}
                 onChange={handleInputChange}
               />
-
-              <label>Reps</label>
+              <label style={{ marginTop: "0.4rem" }}>Reps :</label>
               <input
                 name="reps"
                 type="number"
@@ -202,4 +225,4 @@ const EditWorkoutDialog = ({ dialog, handleCloseDialog }) => {
   );
 };
 
-export default EditWorkoutDialog;
+export default EditWorkoutPlanDialog;

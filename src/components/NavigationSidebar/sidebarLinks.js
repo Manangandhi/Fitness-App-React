@@ -7,4 +7,8 @@ export const sidebarLinks = [
     path: "/workout",
     label: "Workout",
   },
+  {
+    path: "/workoutPlan",
+    label: "Workout Plan",
+  },
 ];

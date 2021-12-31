@@ -1,91 +1,66 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { days, mockData } from "../../mockdata";
-import EditWorkoutDialog from "./EditWorkoutDialog";
-import "./Workout.css";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import WorkoutService from "../../services/workoutService";
+// import { GoDiffAdded } from "react-icons/go";
+// import { mockData } from "../../mockdata";
 
 const Workout = () => {
-  const [editWorkoutDialog, setEditWorkoutDialog] = useState({
-    open: false,
-  });
+  const [toggleForm, setToggleForm] = useState(false);
 
-  const handleEditWorkoutBtn = (selectedDay) => {
-    setEditWorkoutDialog((prev) => ({
-      ...prev,
-      open: true,
-      day: selectedDay,
-    }));
+  const dispatch = useDispatch();
+
+  const workoutList = useSelector((state) => state.workouts.workouts);
+  console.log("list", workoutList);
+
+  useEffect(() => {
+    dispatch(WorkoutService.workoutList());
+  }, [dispatch]);
+
+  const handleAddWorkout = () => {
+    setToggleForm(!toggleForm);
   };
-
-  const handleCloseDialog = () => {
-    setEditWorkoutDialog((prev) => ({
-      ...prev,
-      open: false,
-    }));
-  };
-
-  const data = useSelector((state) => state.workout.workouts);
-
   return (
     <div>
-      <h3>Daily Workout Plan</h3>
-      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-        {days?.map((item, index) => {
-          return (
-            <div className="workout-list" key={index}>
-              <span style={{ fontSize: "2rem" }}>{item}</span>
+      <button
+        style={{
+          background: "#3aa2fd",
+          //   width: "80%",
+          color: "white",
+          padding: "0.5rem",
+          marginTop: "1rem",
+          cursor: "pointer",
+        }}
+        type="button"
+        onClick={handleAddWorkout}
+      >
+        <div>
+          {/* <GoDiffAdded style={{ display: "inline-block", textAlign: "top" }} /> */}
+          Add Workout
+        </div>
+      </button>
 
-              <div className="main-workout">
-                {data?.map((wk) => {
-                  if (wk.day === item) {
-                    return (
-                      <div key={wk.day} className="workout-items">
-                        <span style={{ fontSize: "1.2rem" }}>
-                          <b>Workout : </b>
-                          {wk.workout}
-                        </span>
-                        {wk.exercises.map((ex, index) => {
-                          return (
-                            <div style={{ marginTop: "0.5rem" }} key={index}>
-                              <span style={{ fontSize: "1.2rem" }}>
-                                <b> Exercise {index + 1} : </b>
-                                {
-                                  mockData
-                                    .find((m) => m.workoutName === wk.workout)
-                                    ?.exercises?.find(
-                                      (ee) => ee._id === ex.exerciseId
-                                    )?.name
-                                }
-                              </span>
-                              <div>
-                                <span>{ex.set} sets</span>-
-                                <span>{ex.reps} reps</span>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    );
-                  }
-                  return null;
-                })}
-                <button
-                  type="button"
-                  onClick={() => handleEditWorkoutBtn(item)}
-                  className="edit-btn"
-                >
-                  Edit
-                </button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      <EditWorkoutDialog
-        dialog={editWorkoutDialog}
-        handleCloseDialog={handleCloseDialog}
-      />
+      {toggleForm && (
+        <div>
+          <label>Workout Name: </label>
+          <input type="text" placeholder="Enter Workout Name Here..." />
+          <label>Exercise Name: </label>
+          <input type="text" placeholder="Enter Workout Name Here..." />
+        </div>
+      )}
+      {workoutList.map((wk) => {
+        return (
+          <div key={wk._id}>
+            <li>{wk.workoutName}</li>
+            {wk?.exercises?.map((ex) => {
+              return (
+                <span key={ex.name}>
+                  {ex.name}-{ex.reps}
+                </span>
+              );
+            })}
+          </div>
+        );
+      })}
     </div>
   );
 };

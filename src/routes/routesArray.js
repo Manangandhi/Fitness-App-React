@@ -3,6 +3,7 @@ import SignUp from "../components/Authentication/Signup/SignUp";
 import Dashboard from "../components/Dashboard/Dashboard";
 import Layout from "../components/Layout/Layout";
 import Workout from "../components/Workout/Workout";
+import WorkoutPlan from "../components/WorkoutPlan/WorkoutPlan";
 
 const MakeLayoutComponent = ({ Component, title }) => {
   return (
@@ -23,6 +24,14 @@ const routes = [
     path: "/workout",
     title: "workout",
     Component: <MakeLayoutComponent title="Workout" Component={Workout} />,
+    isAuthenticated: true,
+  },
+  {
+    path: "/workoutPlan",
+    title: "workout Plan",
+    Component: (
+      <MakeLayoutComponent title="Workout Plan" Component={WorkoutPlan} />
+    ),
     isAuthenticated: true,
   },
   {
