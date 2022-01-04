@@ -11,12 +11,12 @@ import {
 import { useState } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { mockData } from "../../mockdata";
+import { mockData } from "../../../mockdata";
 import {
   addExercise,
   addExerciseToWorkout,
   updateWorkout,
-} from "../../store/actions/selectedWorkout";
+} from "../../../store/actions/selectedWorkout";
 import "./EditWorkoutPlanDialog.css";
 
 const EditWorkoutPlanDialog = ({ dialog, handleCloseDialog }) => {

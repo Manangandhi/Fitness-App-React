@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { days, mockData } from "../../mockdata";
+import { days, mockData } from "../../../mockdata";
 import EditWorkoutDialog from "./EditWorkoutPlanDialog";
 import "./WorkoutPlan.css";
 

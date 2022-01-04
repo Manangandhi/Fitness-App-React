@@ -4,8 +4,12 @@ export const sidebarLinks = [
     label: "Dashboard",
   },
   {
+    path: "/workoutType",
+    label: "Workout Type",
+  },
+  {
     path: "/workout",
-    label: "Workout",
+    label: "Exercises",
   },
   {
     path: "/workoutPlan",

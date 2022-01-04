@@ -41,3 +41,24 @@ export const addWorkoutFailure = (payload) => {
     payload,
   };
 };
+
+// Delete
+export const deleteWorkoutRequest = () => {
+  return {
+    type: workoutActionTypes.DELETE_WORKOUT_REQUEST,
+  };
+};
+
+export const deleteWorkoutSuccess = (payload) => {
+  return {
+    type: workoutActionTypes.DELETE_WORKOUT_SUCCESS,
+    payload,
+  };
+};
+
+export const deleteWorkoutFailure = (payload) => {
+  return {
+    type: workoutActionTypes.DELETE_WORKOUT_FAILURE,
+    payload,
+  };
+};
