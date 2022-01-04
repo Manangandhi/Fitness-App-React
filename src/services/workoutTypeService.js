@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import {
   addWorkoutTypeFailure,
   addWorkoutTypeRequest,
@@ -25,8 +26,8 @@ class WorkoutTypeService {
           dispatch(workoutTypeListSuccess(res.data));
         })
         .catch((error) => {
-          console.log(error);
           dispatch(workoutTypeListFailure(error));
+          toast.error("Error fetching workout type");
         });
     };
   };
@@ -39,10 +40,11 @@ class WorkoutTypeService {
         .post("http://localhost:5000/workoutType/create", data)
         .then((res) => {
           dispatch(addWorkoutTypeSuccess(res.data));
+          toast.success("Workout Type created successfully");
         })
         .catch((error) => {
-          console.log(error);
           dispatch(addWorkoutTypeFailure(error));
+          toast.error("Error creating workout type");
         });
     };
   };
@@ -59,10 +61,11 @@ class WorkoutTypeService {
         })
         .then((res) => {
           dispatch(deleteWorkoutTypeSuccess(id));
+          toast.success("Workout Type deleted successfully");
         })
         .catch((error) => {
-          console.log(error);
           dispatch(deleteWorkoutTypeFailure(error));
+          toast.error("Error deleting workout type");
         });
     };
   };
@@ -75,10 +78,11 @@ class WorkoutTypeService {
         .patch("http://localhost:5000/workoutType/update", data)
         .then((res) => {
           dispatch(updateWorkoutTypeSuccess(res.data));
+          toast.success("Workout Type updated successfully");
         })
         .catch((error) => {
-          console.log(error);
           dispatch(updateWorkoutTypeFailure(error));
+          toast.error("Error updating workout type");
         });
     };
   };

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import WorkoutTypeService from "../../../services/workoutTypeService";
 import WorkoutTypeList from "./WorkoutTypeList";
+import "./WorkoutType.css";
 
 const WorkoutType = () => {
   const [openAddForm, setOpenAddForm] = useState(false);
@@ -15,24 +16,28 @@ const WorkoutType = () => {
   };
 
   return (
-    <div>
+    <div className="contain-main-wrapper">
       <button
         type="button"
-        className=""
+        className="add-type-btn"
         onClick={() => setOpenAddForm(!openAddForm)}
       >
         Add Workout Type
       </button>
 
       {openAddForm && (
-        <div className="">
+        <div className="contain-wrapper">
           <label>Name: </label>
           <input
             type="text"
-            className=""
+            value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <button type="button" className="" onClick={handleSubmit}>
+          <button
+            type="button"
+            className="submit-btn-style"
+            onClick={handleSubmit}
+          >
             Submit
           </button>
         </div>

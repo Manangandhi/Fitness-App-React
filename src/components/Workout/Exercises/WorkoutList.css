@@ -8,7 +8,7 @@
 .item-container {
   display: flex;
   flex-direction: column;
-  width: 12rem;
+  width: 13rem;
   background-color: rgb(114, 184, 245);
   margin: 1rem;
   height: max-content;
@@ -19,7 +19,7 @@
 .delete-btn {
   background-color: #131618;
   color: white;
-  margin: 0.5rem;
+  margin: 1rem;
   cursor: pointer;
   border-radius: 0.5rem;
   border: none;
@@ -35,7 +35,7 @@
 .edit-button {
   background-color: rgb(239, 241, 93);
   color: black;
-  margin: 0.5rem;
+  margin: 1rem;
   cursor: pointer;
   border-radius: 0.5rem;
   border: none;

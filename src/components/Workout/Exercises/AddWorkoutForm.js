@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import "./AddWorkoutForm.css";
 
 const AddWorkoutForm = ({
@@ -7,6 +9,8 @@ const AddWorkoutForm = ({
   handleDataChange,
   handleSubmitBtn,
 }) => {
+  const workoutType = useSelector((state) => state.workoutType.types);
+
   return (
     <div className="form-main-wrapper">
       <button className="add-btn" type="button" onClick={handleAddWorkout}>
@@ -14,13 +18,28 @@ const AddWorkoutForm = ({
       </button>
       {toggleForm && (
         <div className="form-wrapper">
-          <label>Workout Type </label>
-          <input
-            type="text"
-            value={addWorkoutData.workoutName}
-            onChange={handleDataChange}
-            name="workoutName"
-          />
+          <FormControl
+            variant="standard"
+            sx={{ m: 1, minWidth: 120, width: 150 }}
+          >
+            <InputLabel id="workoutType">Workout Type</InputLabel>
+            <Select
+              labelId="workoutType"
+              id="workoutType"
+              value={addWorkoutData.name}
+              onChange={handleDataChange}
+              label="Workout Type"
+              name="name"
+            >
+              {workoutType.map((wk) => {
+                return (
+                  <MenuItem key={wk._id} value={wk.name}>
+                    {wk.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
           <label>Exercise Name </label>
           <input
             type="text"

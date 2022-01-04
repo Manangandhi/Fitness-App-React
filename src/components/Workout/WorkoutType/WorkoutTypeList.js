@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import {
   Paper,
   Table,
@@ -26,7 +27,24 @@ const WorkoutTypeList = () => {
   }, [dispatch]);
 
   const handleDelete = (id) => {
-    dispatch(WorkoutTypeService.DeleteWorkoutType(id));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((willDelete) => {
+      if (willDelete.isConfirmed) {
+        // Dispatch Function
+        let deleted = dispatch(WorkoutTypeService.DeleteWorkoutType(id));
+
+        if (deleted) {
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        }
+      }
+    });
   };
 
   const handleEditBtn = (data) => {
@@ -57,13 +75,13 @@ const WorkoutTypeList = () => {
           alignItems: "center",
           width: "100%",
           boxShadow: "none",
-          marginTop: "3rem",
+          marginTop: "1.5rem",
         }}
       >
         <Table
           sx={{
             minWidth: 650,
-            width: 400,
+            width: 350,
             boxShadow: "rgb(128 128 128 / 42%) 3px 4px 10px 2px",
           }}
           size="small"
@@ -89,24 +107,60 @@ const WorkoutTypeList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {workoutTypeList.map((wk) => (
-              <TableRow
-                key={wk._id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {wk.name}
-                </TableCell>
-                <TableCell align="center" component="th" scope="row">
-                  <button type="button" onClick={() => handleEditBtn(wk)}>
-                    Edit
-                  </button>
-                  <button type="button" onClick={() => handleDelete(wk._id)}>
-                    Delete
-                  </button>
-                </TableCell>
-              </TableRow>
-            ))}
+            {workoutTypeList && workoutTypeList.length > 0 ? (
+              workoutTypeList.map((wk) => (
+                <TableRow
+                  key={wk._id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {wk.name}
+                  </TableCell>
+                  <TableCell align="center" component="th" scope="row">
+                    <button
+                      style={{
+                        backgroundColor: "#3f4397",
+                        color: "white",
+                        padding: "0.5rem",
+                        marginTop: "1rem",
+                        cursor: "pointer",
+                        borderRadius: "0.4rem",
+                        border: "none",
+                        width: "3rem",
+                        height: "2rem",
+                        margin: "0.5rem",
+                      }}
+                      type="button"
+                      onClick={() => handleEditBtn(wk)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      style={{
+                        backgroundColor: "red",
+                        color: "white",
+                        padding: "0.5rem",
+                        marginTop: "1rem",
+                        cursor: "pointer",
+                        borderRadius: "0.4rem",
+                        border: "none",
+                        width: "3.5rem",
+                        height: "2rem",
+                        margin: "0.5rem",
+                      }}
+                      type="button"
+                      onClick={() => handleDelete(wk._id)}
+                    >
+                      Delete
+                    </button>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <div>
+                <h3>No records Found</h3>
+              </div>
+            )}
           </TableBody>
         </Table>
       </TableContainer>

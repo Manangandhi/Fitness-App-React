@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import {
   addWorkoutFailure,
   addWorkoutListSuccess,
@@ -22,7 +23,6 @@ class WorkoutService {
           dispatch(workoutListSuccess(res.data));
         })
         .catch((error) => {
-          console.log("error", error);
           dispatch(workoutListFailure(error));
         });
     };
@@ -36,10 +36,11 @@ class WorkoutService {
         .post("http://localhost:5000/workout/create", data)
         .then((res) => {
           dispatch(addWorkoutListSuccess(res.data));
+          toast.success("Workout created successfully");
         })
         .catch((error) => {
-          console.log("error", error);
           dispatch(addWorkoutFailure(error));
+          toast.error("Error creating workout");
         });
     };
   };
@@ -57,10 +58,11 @@ class WorkoutService {
         })
         .then((res) => {
           dispatch(deleteWorkoutSuccess(id));
+          toast.success("Workout deleted successfully");
         })
         .catch((error) => {
-          console.log("error", error);
           dispatch(deleteWorkoutFailure(error));
+          toast.error("Error deleted workout");
         });
     };
   };

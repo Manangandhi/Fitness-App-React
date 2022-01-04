@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 import WorkoutService from "../../../services/workoutService";
 import AddWorkoutForm from "./AddWorkoutForm";
 import "./Workout.css";
 import WorkoutList from "./WorkoutList";
 
 const initialData = {
-  workoutName: "",
+  name: "",
   exerciseName: "",
   reps: "",
   set: "",
@@ -24,7 +25,7 @@ const Workout = () => {
   const handleSubmitBtn = () => {
     dispatch(
       WorkoutService.createWorkout({
-        workoutName: addWorkoutData.workoutName,
+        workoutName: addWorkoutData.name,
         exercises: [
           {
             name: addWorkoutData.exerciseName,
@@ -49,7 +50,24 @@ const Workout = () => {
   }, [dispatch]);
 
   const handleDeleteBtn = (id) => {
-    dispatch(WorkoutService.deleteWorkout(id));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((willDelete) => {
+      if (willDelete.isConfirmed) {
+        // Dispatch Function
+        let deleted = dispatch(WorkoutService.deleteWorkout(id));
+
+        if (deleted) {
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        }
+      }
+    });
   };
 
   return (
@@ -61,7 +79,6 @@ const Workout = () => {
         handleDataChange={handleDataChange}
         handleSubmitBtn={handleSubmitBtn}
       />
-      <h3>Workout List</h3>
       <WorkoutList
         workoutList={workoutList}
         handleDeleteBtn={handleDeleteBtn}

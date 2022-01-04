@@ -1,0 +1,97 @@
+.contain-main-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.contain-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+  background: rgb(153, 153, 153);
+  border-radius: 1rem;
+  padding: 0.5rem;
+}
+
+.contain-wrapper label {
+  font-size: 500;
+  color: rgb(51, 51, 51);
+}
+
+.contain-wrapper input[type="text"] {
+  height: 1.5rem;
+  border: none;
+  margin: 0.5rem;
+}
+
+.add-type-btn {
+  background-color: #3aa2fd;
+  color: white;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  border: none;
+  width: 8rem;
+  height: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.add-type-btn:hover {
+  background-color: black;
+}
+
+.submit-btn-style {
+  background-color: #0277dd;
+  color: white;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  border: none;
+  width: 4rem;
+  height: 2rem;
+}
+
+.submit-btn-style:hover {
+  background-color: #3aa2fd;
+}
+
+.update-btn {
+  background-color: #0277dd;
+  color: white;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  border: none;
+  width: 4rem;
+  height: 2rem;
+  float: right;
+}
+.update-btn:hover {
+  background-color: #3aa2fd;
+}
+
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog-container label {
+  font-size: 1rem;
+  color: rgb(51, 51, 51);
+}
+
+.dialog-container input[type="text"] {
+  height: 2rem;
+  margin: 0.5rem;
+  font-size: 1rem;
+}

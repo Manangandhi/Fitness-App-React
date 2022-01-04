@@ -35,14 +35,8 @@ const EditWorkoutType = ({ openEditDialog, handleClose }) => {
       </DialogTitle>
       <Divider />
       <DialogContent>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-evenly",
-            marginTop: "1rem",
-          }}
-        >
-          <label style={{ marginTop: "0.4rem" }}>Name : </label>
+        <div className="dialog-container">
+          <label>Name</label>
           <input
             name="name"
             type="text"
@@ -50,7 +44,7 @@ const EditWorkoutType = ({ openEditDialog, handleClose }) => {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <button className="" type="button" onClick={handleUpdate}>
+        <button className="update-btn" type="button" onClick={handleUpdate}>
           Update
         </button>
       </DialogContent>

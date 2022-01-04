@@ -6,7 +6,9 @@ const WorkoutList = ({ workoutList, handleDeleteBtn }) => {
       {workoutList.map((wk) => {
         return (
           <div className="item-container" key={wk._id}>
-            <h3>{wk.workoutName}</h3>
+            <h3 style={{ color: "white", fontSize: "1.2rem" }}>
+              {wk.workoutName}
+            </h3>
 
             {wk?.exercises?.map((ex, index) => {
               return (
@@ -14,14 +16,20 @@ const WorkoutList = ({ workoutList, handleDeleteBtn }) => {
                   style={{
                     display: "flex",
                     flexDirection: "column",
+                    backgroundColor: "#e1f1ff",
+                    borderRadius: "1rem",
+                    padding: "0.5rem",
                   }}
                   key={index}
                 >
                   <span>
-                    Exercise {index + 1}: {ex.name}
+                    <b>Exercise {index + 1}: </b> {ex.name}
                   </span>
                   <span>
-                    sets: {ex.set} and reps: {ex.reps}
+                    <b>Sets : </b> {ex.set}
+                  </span>
+                  <span>
+                    <b>Reps :</b> {ex.reps}
                   </span>
                 </div>
               );
