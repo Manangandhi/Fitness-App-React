@@ -23,6 +23,7 @@ const Header = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
+        position="sticky"
         sx={{
           backgroundImage: `linear-gradient(
             218deg,
@@ -32,7 +33,6 @@ const Header = () => {
           backgroundColor: "white",
           boxShadow: "none",
         }}
-        position="static"
       >
         <Toolbar>
           <IconButton

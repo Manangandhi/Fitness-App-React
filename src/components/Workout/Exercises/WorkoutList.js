@@ -26,10 +26,10 @@ const WorkoutList = ({ workoutList, handleDeleteBtn }) => {
                     <b>Exercise {index + 1}: </b> {ex.name}
                   </span>
                   <span>
-                    <b>Sets : </b> {ex.set}
+                    <b>Sets : </b> {ex.set || 0}
                   </span>
                   <span>
-                    <b>Reps :</b> {ex.reps}
+                    <b>Reps :</b> {ex.reps || 0}
                   </span>
                 </div>
               );

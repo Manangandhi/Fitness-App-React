@@ -11,6 +11,8 @@ const AddWorkoutForm = ({
 }) => {
   const workoutType = useSelector((state) => state.workoutType.types);
 
+  const handleAddMoreExerciseBtn = () => {};
+
   return (
     <div className="form-main-wrapper">
       <button className="add-btn" type="button" onClick={handleAddWorkout}>
@@ -40,33 +42,44 @@ const AddWorkoutForm = ({
               })}
             </Select>
           </FormControl>
-          <label>Exercise Name </label>
-          <input
-            type="text"
-            value={addWorkoutData.exerciseName}
-            onChange={handleDataChange}
-            name="exerciseName"
-          />
-          <div style={{ display: "flex", marginTop: "0.5rem" }}>
-            <label style={{ marginTop: "0.4rem" }}>Sets: </label>&ensp;
+          {/* Exercise Wrapper */}
+          <div className="exercise-content-wrapper">
+            <label>Exercise Name </label>
             <input
-              name="set"
-              type="number"
-              value={addWorkoutData.set}
+              type="text"
+              value={addWorkoutData.exerciseName}
               onChange={handleDataChange}
-              className="input-field"
+              name="exerciseName"
             />
-            &ensp;
-            <label style={{ marginTop: "0.4rem" }}>Reps: </label>&ensp;
-            <input
-              name="reps"
-              type="number"
-              value={addWorkoutData.reps}
-              onChange={handleDataChange}
-              className="input-field"
-            />
+            <div style={{ display: "flex", marginTop: "0.5rem" }}>
+              <label style={{ marginTop: "0.4rem" }}>Sets: </label>&ensp;
+              <input
+                name="set"
+                type="number"
+                value={addWorkoutData.set}
+                onChange={handleDataChange}
+                className="input-field"
+              />
+              &ensp;
+              <label style={{ marginTop: "0.4rem" }}>Reps: </label>&ensp;
+              <input
+                name="reps"
+                type="number"
+                value={addWorkoutData.reps}
+                onChange={handleDataChange}
+                className="input-field"
+              />
+            </div>
           </div>
-          &ensp;
+          {/* .......END */}
+
+          <button
+            className="add-exercise-btn"
+            type="button"
+            onClick={handleAddMoreExerciseBtn}
+          >
+            + Add More Exercises
+          </button>
           <button
             className="submit-btn"
             type="button"

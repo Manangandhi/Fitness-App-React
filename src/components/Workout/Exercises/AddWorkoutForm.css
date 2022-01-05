@@ -79,3 +79,24 @@
 .submit-btn:hover {
   background-color: #3aa2fd;
 }
+
+.exercise-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  background: #a2d3ff;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.add-exercise-btn {
+  background: #4e4e4e;
+  color: white;
+  width: 10rem;
+  height: 2rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  border: none;
+  margin: 1rem;
+  float: right;
+}
