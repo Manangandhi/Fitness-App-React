@@ -42,7 +42,7 @@ export const workoutReducer = (state = initialState, action) => {
       };
     }
     case workoutActionTypes.ADD_WORKOUT_SUCCESS: {
-      console.log("payload", action.payload);
+      // console.log("payload", action.payload);
       return {
         ...state,
         loading: false,

@@ -1,24 +1,79 @@
-import { useSelector } from "react-redux";
+import { useState } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import WorkoutService from "../../../services/workoutService";
 import "./AddWorkoutForm.css";
 
-const AddWorkoutForm = ({
-  handleAddWorkout,
-  toggleForm,
-  addWorkoutData,
-  handleDataChange,
-  handleSubmitBtn,
-}) => {
-  const workoutType = useSelector((state) => state.workoutType.types);
+const initialData = {
+  exerciseName: "",
+  reps: "",
+  set: "",
+};
 
-  const handleAddMoreExerciseBtn = () => {};
+const AddWorkoutForm = ({ setToggleForm, workoutList }) => {
+  const [addWorkoutDataInput, setAddWorkoutDataInput] = useState([
+    {
+      ...initialData,
+      id: 1,
+    },
+  ]);
+
+  const [workoutTypeInput, setWorkoutTypeInput] = useState("");
+
+  const dispatch = useDispatch();
+
+  const workoutType = useSelector((state) => state.workoutType.types);
+  const handleAddMoreExerciseBtn = () => {
+    setAddWorkoutDataInput((prev) => [
+      ...prev,
+      {
+        ...initialData,
+        id: prev.length + 1,
+      },
+    ]);
+  };
+
+  const handleDataChange = (e, id) => {
+    setAddWorkoutDataInput((prev) =>
+      prev.map((p) => {
+        if (id === p.id) {
+          return {
+            ...p,
+            [e.target.name]: e.target.value,
+          };
+        }
+        return p;
+      })
+    );
+  };
+
+  const handleSubmitBtn = () => {
+    dispatch(
+      WorkoutService.createWorkout({
+        workoutName: workoutTypeInput,
+        exercises: [
+          {
+            name: addWorkoutDataInput.exerciseName,
+            reps: addWorkoutDataInput.reps,
+            set: addWorkoutDataInput.set,
+          },
+        ],
+      })
+    );
+    setAddWorkoutDataInput(initialData);
+    setToggleForm((prev) => !prev);
+  };
+
+  let filteredTypeName = workoutType?.filter((ty) => {
+    let findType = workoutList?.find((wk) => wk?.workoutName === ty?.name);
+    if (findType) return false;
+    return true;
+  });
 
   return (
     <div className="form-main-wrapper">
-      <button className="add-btn" type="button" onClick={handleAddWorkout}>
-        Add Workout
-      </button>
-      {toggleForm && (
+      {
         <div className="form-wrapper">
           <FormControl
             variant="standard"
@@ -28,12 +83,12 @@ const AddWorkoutForm = ({
             <Select
               labelId="workoutType"
               id="workoutType"
-              value={addWorkoutData.name}
-              onChange={handleDataChange}
+              value={workoutTypeInput}
+              onChange={(e) => setWorkoutTypeInput(e.target.value)}
               label="Workout Type"
-              name="name"
+              name="workoutTypeInput"
             >
-              {workoutType.map((wk) => {
+              {filteredTypeName?.map((wk) => {
                 return (
                   <MenuItem key={wk._id} value={wk.name}>
                     {wk.name}
@@ -43,34 +98,38 @@ const AddWorkoutForm = ({
             </Select>
           </FormControl>
           {/* Exercise Wrapper */}
-          <div className="exercise-content-wrapper">
-            <label>Exercise Name </label>
-            <input
-              type="text"
-              value={addWorkoutData.exerciseName}
-              onChange={handleDataChange}
-              name="exerciseName"
-            />
-            <div style={{ display: "flex", marginTop: "0.5rem" }}>
-              <label style={{ marginTop: "0.4rem" }}>Sets: </label>&ensp;
-              <input
-                name="set"
-                type="number"
-                value={addWorkoutData.set}
-                onChange={handleDataChange}
-                className="input-field"
-              />
-              &ensp;
-              <label style={{ marginTop: "0.4rem" }}>Reps: </label>&ensp;
-              <input
-                name="reps"
-                type="number"
-                value={addWorkoutData.reps}
-                onChange={handleDataChange}
-                className="input-field"
-              />
-            </div>
-          </div>
+          {addWorkoutDataInput.map((inpt, idx) => {
+            return (
+              <div className="exercise-content-wrapper" key={inpt.id}>
+                <label>Exercise Name </label>
+                <input
+                  type="text"
+                  value={addWorkoutDataInput[idx].exerciseName}
+                  onChange={(e) => handleDataChange(e, inpt.id)}
+                  name="exerciseName"
+                />
+                <div style={{ display: "flex", marginTop: "0.5rem" }}>
+                  <label style={{ marginTop: "0.4rem" }}>Sets: </label>&ensp;
+                  <input
+                    name="set"
+                    type="number"
+                    value={addWorkoutDataInput[idx].set}
+                    onChange={(e) => handleDataChange(e, inpt.id)}
+                    className="input-field"
+                  />
+                  &ensp;
+                  <label style={{ marginTop: "0.4rem" }}>Reps: </label>&ensp;
+                  <input
+                    name="reps"
+                    type="number"
+                    value={addWorkoutDataInput[idx].reps}
+                    onChange={(e) => handleDataChange(e, inpt.id)}
+                    className="input-field"
+                  />
+                </div>
+              </div>
+            );
+          })}
           {/* .......END */}
 
           <button
@@ -88,7 +147,7 @@ const AddWorkoutForm = ({
             Submit
           </button>
         </div>
-      )}
+      }
     </div>
   );
 };

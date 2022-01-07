@@ -21,7 +21,7 @@ class WorkoutTypeService {
     return (dispatch) => {
       dispatch(workoutTypeListRequest());
       axios
-        .post("http://localhost:5000/workoutType/list", "")
+        .post(`${process.env.REACT_APP_API_URL}/workoutType/list`, "")
         .then((res) => {
           dispatch(workoutTypeListSuccess(res.data));
         })
@@ -37,7 +37,7 @@ class WorkoutTypeService {
     return (dispatch) => {
       dispatch(addWorkoutTypeRequest());
       axios
-        .post("http://localhost:5000/workoutType/create", data)
+        .post(`${process.env.REACT_APP_API_URL}/workoutType/create`, data)
         .then((res) => {
           dispatch(addWorkoutTypeSuccess(res.data));
           toast.success("Workout Type created successfully");
@@ -54,7 +54,7 @@ class WorkoutTypeService {
     return (dispatch) => {
       dispatch(deleteWorkoutTypeRequest());
       axios
-        .delete("http://localhost:5000/workoutType/delete", {
+        .delete(`${process.env.REACT_APP_API_URL}/workoutType/delete`, {
           data: {
             _id: id,
           },
@@ -75,7 +75,7 @@ class WorkoutTypeService {
     return (dispatch) => {
       dispatch(updateWorkoutTypeRequest());
       axios
-        .patch("http://localhost:5000/workoutType/update", data)
+        .patch(`${process.env.REACT_APP_API_URL}/workoutType/update`, data)
         .then((res) => {
           dispatch(updateWorkoutTypeSuccess(res.data));
           toast.success("Workout Type updated successfully");

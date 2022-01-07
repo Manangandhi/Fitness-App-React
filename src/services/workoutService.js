@@ -18,7 +18,7 @@ class WorkoutService {
     return (dispatch) => {
       dispatch(workoutListRequest());
       axios
-        .post("http://localhost:5000/workout/list", "")
+        .post(`${process.env.REACT_APP_API_URL}/workout/list`, "")
         .then((res) => {
           dispatch(workoutListSuccess(res.data));
         })
@@ -33,8 +33,9 @@ class WorkoutService {
     return (dispatch) => {
       dispatch(addWorkoutRequest());
       axios
-        .post("http://localhost:5000/workout/create", data)
+        .post(`${process.env.REACT_APP_API_URL}/workout/create`, data)
         .then((res) => {
+          // console.log("response", res);
           dispatch(addWorkoutListSuccess(res.data));
           toast.success("Workout created successfully");
         })
@@ -47,11 +48,10 @@ class WorkoutService {
 
   // Delete
   static deleteWorkout = (id) => {
-    console.log("id", id);
     return (dispatch) => {
       dispatch(deleteWorkoutRequest());
       axios
-        .delete("http://localhost:5000/workout/delete", {
+        .delete(`${process.env.REACT_APP_API_URL}/workout/delete`, {
           data: {
             _id: id,
           },

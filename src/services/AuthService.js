@@ -9,7 +9,10 @@ class AuthService {
       }
       const { email, password } = data;
       axios
-        .post("http://localhost:5000/user/signup", { email, password })
+        .post(`${process.env.REACT_APP_API_URL}/user/signup`, {
+          email,
+          password,
+        })
         .then((res) => {
           dispatch(signupSuccess(res.data));
         })
@@ -26,7 +29,10 @@ class AuthService {
       }
       const { email, password } = data;
       axios
-        .post("http://localhost:5000/user/login", { email, password })
+        .post(`${process.env.REACT_APP_API_URL}/user/login`, {
+          email,
+          password,
+        })
         .then((res) => {
           dispatch(loginSuccess(res.data));
         })

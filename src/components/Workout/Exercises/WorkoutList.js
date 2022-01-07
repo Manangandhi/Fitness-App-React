@@ -1,6 +1,7 @@
 import "./WorkoutList.css";
 
 const WorkoutList = ({ workoutList, handleDeleteBtn }) => {
+  // console.log("list", workoutList);
   return (
     <div className="list-container">
       {workoutList.map((wk) => {
