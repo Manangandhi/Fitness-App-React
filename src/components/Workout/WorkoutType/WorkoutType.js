@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+// import { RiLoader2Line } from "react-icons/ri";
 import WorkoutTypeService from "../../../services/workoutTypeService";
 import WorkoutTypeList from "./WorkoutTypeList";
 import "./WorkoutType.css";
@@ -33,12 +34,18 @@ const WorkoutType = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
+
           <button
             type="button"
             className="submit-btn-style"
             onClick={handleSubmit}
           >
             Submit
+            {/* {submitting ? (
+              <RiLoader2Line icon="spinner" className="spinner" />
+            ) : (
+              "Submit"
+            )} */}
           </button>
         </div>
       )}
