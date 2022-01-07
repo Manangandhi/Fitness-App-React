@@ -1,6 +1,6 @@
 import { SwipeableDrawer } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   hideNavigationMenu,
   showNavigationMenu,
@@ -20,6 +20,8 @@ const NavigationSidebar = () => {
     dispatch(showNavigationMenu());
   };
 
+  const location = useLocation();
+
   return (
     <SwipeableDrawer
       anchor={"left"}
@@ -29,12 +31,16 @@ const NavigationSidebar = () => {
     >
       <ul className="sidebarlink-css">
         {sidebarLinks.map((l) => {
+          let isCurrent = location?.pathname === l.path;
           return (
             <Link
               onClick={closeDrawer}
               key={l.path}
               to={l.path}
-              className="menuLink-css"
+              className={isCurrent ? "menuLinkSelected" : "menuLink-css"}
+              // className={
+              //   "menuLink-css" + " " + (isCurrent && "menuLinkSelected")
+              // }
             >
               {l.label}
             </Link>

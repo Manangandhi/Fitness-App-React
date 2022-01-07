@@ -1,5 +1,6 @@
 import { loginSuccess, signupSuccess } from "../store/actions/authActions";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 class AuthService {
   static SignUp = (data = {}) => {
@@ -17,7 +18,7 @@ class AuthService {
           dispatch(signupSuccess(res.data));
         })
         .catch(() => {
-          console.log("Error Logging in!");
+          toast.error("Error Signup!");
         });
     };
   };
@@ -37,7 +38,7 @@ class AuthService {
           dispatch(loginSuccess(res.data));
         })
         .catch(() => {
-          console.log("Error Logging in!");
+          toast.error("Error Logging in!");
         });
     };
   };
