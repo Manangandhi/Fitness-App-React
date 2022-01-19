@@ -7,6 +7,7 @@ import WorkoutService from "../../../services/workoutService";
 import "./AddWorkoutForm.css";
 import WorkoutTypeService from "../../../services/workoutTypeService";
 
+// initialData
 const initialData = {
   name: "",
   reps: "",
