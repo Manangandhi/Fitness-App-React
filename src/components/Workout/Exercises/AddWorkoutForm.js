@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { GiCancel } from "react-icons/gi";
 import WorkoutService from "../../../services/workoutService";
 import "./AddWorkoutForm.css";
+import WorkoutTypeService from "../../../services/workoutTypeService";
 
 const initialData = {
-  exerciseName: "",
+  name: "",
   reps: "",
   set: "",
 };
@@ -23,7 +25,12 @@ const AddWorkoutForm = ({ setToggleForm, workoutList }) => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(WorkoutTypeService.WorkoutTypeList());
+  }, [dispatch]);
+
   const workoutType = useSelector((state) => state.workoutType.types);
+
   const handleAddMoreExerciseBtn = () => {
     setAddWorkoutDataInput((prev) => [
       ...prev,
@@ -52,17 +59,15 @@ const AddWorkoutForm = ({ setToggleForm, workoutList }) => {
     dispatch(
       WorkoutService.createWorkout({
         workoutName: workoutTypeInput,
-        exercises: [
-          {
-            name: addWorkoutDataInput.exerciseName,
-            reps: addWorkoutDataInput.reps,
-            set: addWorkoutDataInput.set,
-          },
-        ],
+        exercises: addWorkoutDataInput,
       })
     );
     setAddWorkoutDataInput(initialData);
     setToggleForm((prev) => !prev);
+  };
+
+  const handleCancelBtn = (id) => {
+    setAddWorkoutDataInput((prev) => prev.filter((p) => p.id !== id));
   };
 
   let filteredTypeName = workoutType?.filter((ty) => {
@@ -101,12 +106,18 @@ const AddWorkoutForm = ({ setToggleForm, workoutList }) => {
           {addWorkoutDataInput.map((inpt, idx) => {
             return (
               <div className="exercise-content-wrapper" key={inpt.id}>
+                {idx > 0 && (
+                  <GiCancel
+                    className="cancel-btn"
+                    onClick={() => handleCancelBtn(inpt.id)}
+                  />
+                )}
                 <label>Exercise Name </label>
                 <input
                   type="text"
-                  value={addWorkoutDataInput[idx].exerciseName}
+                  value={addWorkoutDataInput[idx].name}
                   onChange={(e) => handleDataChange(e, inpt.id)}
-                  name="exerciseName"
+                  name="name"
                 />
                 <div style={{ display: "flex", marginTop: "0.5rem" }}>
                   <label style={{ marginTop: "0.4rem" }}>Sets: </label>&ensp;

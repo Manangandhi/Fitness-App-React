@@ -20,6 +20,7 @@ const WorkoutList = ({ workoutList, handleDeleteBtn }) => {
                     backgroundColor: "#e1f1ff",
                     borderRadius: "1rem",
                     padding: "0.5rem",
+                    marginTop: "0.7rem",
                   }}
                   key={index}
                 >

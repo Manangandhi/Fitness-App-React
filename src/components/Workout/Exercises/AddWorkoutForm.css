@@ -100,3 +100,15 @@
   margin: 1rem;
   float: right;
 }
+
+.cancel-btn {
+  color: red;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  margin-left: 11rem;
+}
+
+.cancel-btn:hover {
+  color: black;
+}
