@@ -1,6 +1,6 @@
 import "./WorkoutList.css";
 
-const WorkoutList = ({ workoutList, handleDeleteBtn }) => {
+const WorkoutList = ({ workoutList, handleDeleteBtn, handleEditBtn }) => {
   // console.log("list", workoutList);
   return (
     <div className="list-container">
@@ -40,7 +40,7 @@ const WorkoutList = ({ workoutList, handleDeleteBtn }) => {
               <button
                 className="edit-button"
                 type="button"
-                // onClick={() => handleDeleteBtn(wk._id)}
+                onClick={() => handleEditBtn(wk)}
               >
                 Edit
               </button>

@@ -34,7 +34,7 @@ const Login = () => {
         password: signupData.password,
       })
     );
-    setSignupData(initialData);
+    setSignupData(initialData) && setLoading(false);
   };
 
   if (isLoggedIn) return <Navigate to="/" />;

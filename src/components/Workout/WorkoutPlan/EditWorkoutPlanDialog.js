@@ -1,8 +1,4 @@
 import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  Divider,
   FormControl,
   InputLabel,
   MenuItem,
@@ -17,6 +13,7 @@ import {
   addExerciseToWorkout,
   updateWorkout,
 } from "../../../store/actions/selectedWorkout";
+import CustomDialog from "../../CustomComponents/CustomDialog";
 import "./EditWorkoutPlanDialog.css";
 
 const EditWorkoutPlanDialog = ({ dialog, handleCloseDialog }) => {
@@ -119,109 +116,98 @@ const EditWorkoutPlanDialog = ({ dialog, handleCloseDialog }) => {
 
     findWorkout !== undefined
       ? setSelectedExerciseInput({
-          set: findWorkout?.set,
-          reps: findWorkout?.reps,
-        })
+        set: findWorkout?.set,
+        reps: findWorkout?.reps,
+      })
       : setSelectedExerciseInput({
-          set: "",
-          reps: "",
-        });
+        set: "",
+        reps: "",
+      });
 
     setCurrentSelection((prev) => ({ ...prev, exercise: ex._id }));
   };
 
   return (
-    <Dialog
-      sx={{ maxWidth: "500px", width: "100%", margin: "auto" }}
-      open={dialog.open}
-      onClose={handleClose}
-    >
-      <DialogTitle
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          color: "#000",
-          fontWeight: "600",
-          backgroundImage: `linear-gradient(208deg, rgba(255, 128, 69, 0.4), rgba(57, 142, 220, 0.4))`,
-          backgroundColor: "white",
-        }}
-      >
-        Edit Workout For {dialog?.day}
-      </DialogTitle>
-      <Divider />
-      <DialogContent>
-        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel id="workout-dropdown">Workouts</InputLabel>
-          <Select
-            labelId="workout-dropdown-label"
-            id="workout-dropdown"
-            value={currentSelection.workout}
-            onChange={handleWorkoutChange}
-            label="Select Workout"
-            name="workout"
-          >
-            {mockData.map((w) => (
-              <MenuItem key={w._id} value={w.workoutName}>
-                {w.workoutName}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        {mockData
-          .find((e) => e.workoutName === currentSelection.workout)
-          ?.exercises?.map((ex) => (
-            <div className="list-items" key={ex.name}>
-              <button
-                type="button"
-                style={{
-                  background:
-                    currentSelection.exercise === ex._id ? "gray" : "",
-                }}
-                onClick={() => handleSelectExercise(ex)}
-                className="items-button"
-              >
-                {ex.name} &nbsp; <AiOutlinePlusCircle />
-              </button>
-            </div>
+    <CustomDialog
+      openDialog={dialog.open}
+      handleCloseDialog={handleClose}
+      dialogTitle={`Edit Workout for ${dialog?.day}`}>
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="workout-dropdown">Workouts</InputLabel>
+        <Select
+          labelId="workout-dropdown-label"
+          id="workout-dropdown"
+          value={currentSelection.workout}
+          onChange={handleWorkoutChange}
+          label="Select Workout"
+          name="workout"
+        >
+          {mockData.map((w) => (
+            <MenuItem key={w._id} value={w.workoutName}>
+              {w.workoutName}
+            </MenuItem>
           ))}
-        {currentSelection.exercise && (
-          <>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                marginTop: "1rem",
-              }}
-            >
-              <label style={{ marginTop: "0.4rem" }}>Sets :</label>
-              <input
-                name="set"
-                type="number"
-                className="input-field"
-                value={selectedExerciseInput.set}
-                onChange={handleInputChange}
-              />
-              <label style={{ marginTop: "0.4rem" }}>Reps :</label>
-              <input
-                name="reps"
-                type="number"
-                className="input-field"
-                value={selectedExerciseInput.reps}
-                onChange={handleInputChange}
-              />
-            </div>
+        </Select>
+      </FormControl>
+
+      {mockData
+        .find((e) => e.workoutName === currentSelection.workout)
+        ?.exercises?.map((ex) => (
+          <div className="list-items" key={ex.name}>
             <button
-              className="add-workout-btn"
               type="button"
-              onClick={handleAddWorkout}
+              style={{
+                background:
+                  currentSelection.exercise === ex._id ? "gray" : "",
+              }}
+              onClick={() => handleSelectExercise(ex)}
+              className="items-button"
             >
-              Add
+              {ex.name} &nbsp; <AiOutlinePlusCircle />
             </button>
-          </>
-        )}
-      </DialogContent>
-    </Dialog>
+          </div>
+        ))}
+      {currentSelection.exercise && (
+        <>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              marginTop: "1rem",
+            }}
+          >
+            <label style={{ marginTop: "0.4rem" }}>Sets :</label>
+            <input
+              name="set"
+              type="number"
+              className="input-field"
+              value={selectedExerciseInput.set}
+              onChange={handleInputChange}
+            />
+            <label style={{ marginTop: "0.4rem" }}>Reps :</label>
+            <input
+              name="reps"
+              type="number"
+              className="input-field"
+              value={selectedExerciseInput.reps}
+              onChange={handleInputChange}
+            />
+          </div>
+          <button
+            className="add-workout-btn"
+            type="button"
+            onClick={handleAddWorkout}
+          >
+            Add
+          </button>
+        </>
+      )}
+    </CustomDialog>
+
+
+
+
+
   );
 };
 

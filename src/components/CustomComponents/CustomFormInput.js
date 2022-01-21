@@ -17,9 +17,6 @@ const CustomFormInput = ({
         placeholder={placeholder}
         name={name}
         onChange={handleChange}
-        // className={`form-control form-control-md ${
-        //   submitted ? (error ? "is-invalid" : "is-valid") : ""
-        // }`}
         {...props}
       />
       {error && (

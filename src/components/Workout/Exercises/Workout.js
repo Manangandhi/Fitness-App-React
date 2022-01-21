@@ -3,21 +3,45 @@ import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import WorkoutService from "../../../services/workoutService";
 import AddWorkoutForm from "./AddWorkoutForm";
+import EditWorkoutDialog from "./EditWorkoutDialog";
 import "./Workout.css";
 import WorkoutList from "./WorkoutList";
 
+const initialDialogData = {
+  open: false,
+  _id: "",
+  workoutName: "",
+  exercises: []
+}
+
 const Workout = () => {
   const [toggleForm, setToggleForm] = useState(false);
+  const [editWorkoutDialog, setEditWorkoutDialog] = useState(initialDialogData)
+
+  const dispatch = useDispatch();
 
   const handleAddWorkout = () => {
     setToggleForm(!toggleForm);
   };
 
-  const dispatch = useDispatch();
   const workoutList = useSelector((state) => state.workouts.workouts);
+
   useEffect(() => {
     dispatch(WorkoutService.workoutList());
   }, [dispatch]);
+
+  const handleEditBtn = (data) => {
+    setEditWorkoutDialog({
+      open: true,
+      _id: data._id,
+      workoutName: data.workoutName,
+      exercises: data.exercises
+    });
+  };
+
+  const handleCloseDialog = () => {
+    setEditWorkoutDialog(initialDialogData)
+  }
 
   const handleDeleteBtn = (id) => {
     Swal.fire({
@@ -54,7 +78,10 @@ const Workout = () => {
       <WorkoutList
         workoutList={workoutList}
         handleDeleteBtn={handleDeleteBtn}
+        handleEditBtn={handleEditBtn}
       />
+
+      <EditWorkoutDialog dialog={editWorkoutDialog} handleCloseDialog={handleCloseDialog} />
     </div>
   );
 };
