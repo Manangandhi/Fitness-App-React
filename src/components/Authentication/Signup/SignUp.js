@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { ImSpinner6 } from "react-icons/im";
 import useAuth from "../../../hooks/useAuth";
 import AuthService from "../../../services/AuthService";
-import CustomFormInput from "../../CustomForm/CustomFormInput";
+import CustomFormInput from "../../CustomComponents/CustomFormInput";
 import "../Signup/Signup.css";
 
 const initialData = {

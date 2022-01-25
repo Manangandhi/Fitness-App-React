@@ -28,7 +28,7 @@ export const addWorkoutRequest = () => {
   };
 };
 
-export const addWorkoutListSuccess = (payload) => {
+export const addWorkoutSuccess = (payload) => {
   return {
     type: workoutActionTypes.ADD_WORKOUT_SUCCESS,
     payload,
@@ -38,6 +38,27 @@ export const addWorkoutListSuccess = (payload) => {
 export const addWorkoutFailure = (payload) => {
   return {
     type: workoutActionTypes.ADD_WORKOUT_FAILURE,
+    payload,
+  };
+};
+
+// Update
+export const updateWorkoutRequest = () => {
+  return {
+    type: workoutActionTypes.UPDATE_WORKOUT_REQUEST,
+  };
+};
+
+export const updateWorkoutSuccess = (payload) => {
+  return {
+    type: workoutActionTypes.UPDATE_WORKOUT_SUCCESS,
+    payload,
+  };
+};
+
+export const updateWorkoutFailure = (payload) => {
+  return {
+    type: workoutActionTypes.UPDATE_WORKOUT_FAILURE,
     payload,
   };
 };

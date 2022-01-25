@@ -2,11 +2,14 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import {
   addWorkoutFailure,
-  addWorkoutListSuccess,
   addWorkoutRequest,
+  addWorkoutSuccess,
   deleteWorkoutFailure,
   deleteWorkoutRequest,
   deleteWorkoutSuccess,
+  updateWorkoutFailure,
+  updateWorkoutRequest,
+  updateWorkoutSuccess,
   workoutListFailure,
   workoutListRequest,
   workoutListSuccess,
@@ -36,12 +39,30 @@ class WorkoutService {
         .post(`${process.env.REACT_APP_API_URL}/workout/create`, data)
         .then((res) => {
           // console.log("response", res);
-          dispatch(addWorkoutListSuccess(res.data));
+          dispatch(addWorkoutSuccess(res.data));
           toast.success("Workout created successfully");
         })
         .catch((error) => {
           dispatch(addWorkoutFailure(error));
           toast.error("Error creating workout");
+        });
+    };
+  };
+
+  // Update
+  static UpdateWorkout = (data) => {
+    return (dispatch) => {
+      dispatch(updateWorkoutRequest());
+      axios
+        .post(`${process.env.REACT_APP_API_URL}/workout/update`, data)
+        .then((res) => {
+          console.log("response", res);
+          dispatch(updateWorkoutSuccess(res.data));
+          toast.success("Workout updated successfully");
+        })
+        .catch((error) => {
+          dispatch(updateWorkoutFailure(error));
+          toast.error("Error Updating workout");
         });
     };
   };
