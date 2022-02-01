@@ -54,9 +54,8 @@ class WorkoutService {
     return (dispatch) => {
       dispatch(updateWorkoutRequest());
       axios
-        .post(`${process.env.REACT_APP_API_URL}/workout/update`, data)
+        .patch(`${process.env.REACT_APP_API_URL}/workout/update`, data)
         .then((res) => {
-          console.log("response", res);
           dispatch(updateWorkoutSuccess(res.data));
           toast.success("Workout updated successfully");
         })

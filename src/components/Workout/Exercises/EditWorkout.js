@@ -1,8 +1,32 @@
+import WorkoutForm from "./WorkoutForm";
 
-const EditWorkout = () => {
+const EditWorkout = ({
+    defaultExercisesValue,
+    workoutList,
+    // View State
+    view,
+    setView,
+    // Workout State
+    selectedWorkout,
+    setSelectedWorkout,
+    // Exercise State
+    exerciseData,
+    setExerciseData,
+    resetForm
+}) => {
 
     return (
-        <div>Edit</div>
+        <WorkoutForm
+            view={view}
+            setView={setView}
+            workoutList={workoutList}
+            selectedWorkout={selectedWorkout}
+            setSelectedWorkout={setSelectedWorkout}
+            exerciseData={exerciseData}
+            setExerciseData={setExerciseData}
+            defaultExercisesValue={defaultExercisesValue}
+            resetForm={resetForm}
+        />
     )
 }
 

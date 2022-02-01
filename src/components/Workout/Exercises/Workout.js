@@ -4,11 +4,13 @@ import Swal from "sweetalert2";
 import WorkoutService from "../../../services/workoutService";
 import AddWorkout from "./AddWorkout";
 import EditWorkout from "./EditWorkout";
-import "./Workout.css";
 import WorkoutList from "./WorkoutList";
+import "./Workout.css";
+import * as uuid from "uuid";
 
 const defaultWorkoutValue = {
   name: "",
+  _id: ""
 }
 
 const defaultExercisesValue = {
@@ -25,9 +27,8 @@ const Workout = () => {
 
   const [selectedWorkout, setSelectedWorkout] = useState(defaultWorkoutValue);
   const [exerciseData, setExerciseData] = useState([{
-    ...defaultExercisesValue,
-    id: 1
-  }])
+    ...defaultExercisesValue
+  }]);
 
   const workoutList = useSelector((state) => state.workouts.workouts);
   const dispatch = useDispatch();
@@ -36,22 +37,41 @@ const Workout = () => {
     dispatch(WorkoutService.workoutList());
   }, [dispatch]);
 
+  // Reset Workout Form
+  const resetForm = () => {
+    setExerciseData([{
+      ...defaultExercisesValue,
+      exerciseIndex: uuid.v4()
+    }]);
+    setSelectedWorkout(defaultWorkoutValue)
+  }
+
+  // Add Workout Btn
   const handleAddWorkout = () => {
     setView((prev) => ({
       ...prev,
       openForm: "create",
       open: !prev.open
     }));
+    resetForm();
   };
 
+  // Edit Btn
   const handleEditBtn = (data) => {
     setView((prev) => ({
       ...prev,
       openForm: "update",
       open: !prev.open
     }));
+    setSelectedWorkout(
+      {
+        name: data?.workoutName,
+        _id: data?._id
+      });
+    setExerciseData(data?.exercises)
   };
 
+  // Delete Btn
   const handleDeleteBtn = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -75,22 +95,39 @@ const Workout = () => {
 
   return (
     <div className="main-container">
-      <button className="add-btn" type="button" onClick={handleAddWorkout}>
+      {view.open === false && <button className="add-btn" type="button" onClick={handleAddWorkout}>
         Add Workout
-      </button>
+      </button>}
       {view.openForm === "create" ? (
         <AddWorkout
-          setView={setView}
           defaultExercisesValue={defaultExercisesValue}
-          defaultWorkoutValue={defaultWorkoutValue}
           workoutList={workoutList}
-          setSelectedWorkout={setSelectedWorkout}
+          // View State
+          view={view}
+          setView={setView}
+          // Workout State
           selectedWorkout={selectedWorkout}
+          setSelectedWorkout={setSelectedWorkout}
+          // Exercise State
           exerciseData={exerciseData}
           setExerciseData={setExerciseData}
+          resetForm={resetForm}
         />
       ) : view.openForm === "update" &&
-      <EditWorkout />
+      <EditWorkout
+        defaultExercisesValue={defaultExercisesValue}
+        workoutList={workoutList}
+        // View State
+        view={view}
+        setView={setView}
+        // Workout State
+        selectedWorkout={selectedWorkout}
+        setSelectedWorkout={setSelectedWorkout}
+        // Exercise State
+        exerciseData={exerciseData}
+        setExerciseData={setExerciseData}
+        resetForm={resetForm}
+      />
       }
 
       <WorkoutList

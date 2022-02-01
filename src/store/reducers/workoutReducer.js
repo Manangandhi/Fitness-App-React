@@ -17,7 +17,7 @@ export const workoutReducer = (state = initialState, action) => {
       };
     }
     case workoutActionTypes.WORKOUT_LIST_SUCCESS: {
-      // console.log("payload", action.payload);
+
       return {
         ...state,
         loading: false,
@@ -29,7 +29,6 @@ export const workoutReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        // workouts: action.payload,
         error: action.payload,
       };
     }
@@ -42,7 +41,6 @@ export const workoutReducer = (state = initialState, action) => {
       };
     }
     case workoutActionTypes.ADD_WORKOUT_SUCCESS: {
-      // console.log("payload", action.payload);
       return {
         ...state,
         loading: false,
@@ -66,11 +64,17 @@ export const workoutReducer = (state = initialState, action) => {
       };
     }
     case workoutActionTypes.UPDATE_WORKOUT_SUCCESS: {
-      // console.log("payload", action.payload);
+      const payload = action.payload;
+      const updatedWorkout = state.workouts.map((wk) => {
+        if (wk?._id === payload?._id) {
+          return payload;
+        }
+        return wk;
+      })
       return {
         ...state,
         loading: false,
-        // workouts: [...state.workouts, action.payload],
+        workouts: updatedWorkout,
         error: "",
       };
     }
@@ -104,7 +108,6 @@ export const workoutReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        // workouts: action.payload,
         error: action.payload,
       };
     }
