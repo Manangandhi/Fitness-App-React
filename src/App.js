@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div className="App">
       <ToastContainer
-        autoClose={4000}
+        autoClose={2000}
         transition={Bounce}
         position="top-center"
         closeOnClick
