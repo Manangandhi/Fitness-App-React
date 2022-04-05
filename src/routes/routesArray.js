@@ -4,7 +4,6 @@ import Dashboard from "../components/Dashboard/Dashboard";
 import Layout from "../components/Layout/Layout";
 import Workout from "../components/Workout/Exercises/Workout";
 import WorkoutType from "../components/Workout/WorkoutType/WorkoutType";
-import WorkoutPlan from "../components/Workout/WorkoutPlan/WorkoutPlan";
 
 const MakeLayoutComponent = ({ Component, title }) => {
   return (
@@ -35,14 +34,7 @@ const routes = [
     Component: <MakeLayoutComponent title="Exercises" Component={Workout} />,
     isAuthenticated: true,
   },
-  {
-    path: "/workoutPlan",
-    title: "Workout Plan",
-    Component: (
-      <MakeLayoutComponent title="Workout Plan" Component={WorkoutPlan} />
-    ),
-    isAuthenticated: true,
-  },
+
   {
     path: "/signup",
     title: "SignUp",
